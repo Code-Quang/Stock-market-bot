@@ -1,0 +1,13 @@
+2025-02-09 21:09:00,916 - INFO - Starting scraping process for MLNK
+2025-02-09 21:09:33,061 - WARNING - Timeout on attempt 1 of 3 for MLNK
+2025-02-09 21:09:45,515 - INFO - Found 4 articles for MLNK
+2025-02-09 21:09:45,515 - INFO - Scraping article: https://finance.yahoo.com/news/meridianlink-inc-nyse-mlnk-intrinsic-155635501.html
+2025-02-09 21:10:44,157 - INFO - Starting scraping process for MLNK
+2025-02-09 21:10:44,158 - ERROR - Fatal error during scraping: WebDriver.__init__() got an unexpected keyword argument 'desired_capabilities'
+2025-02-09 21:10:44,158 - ERROR - Script failed: WebDriver.__init__() got an unexpected keyword argument 'desired_capabilities'
+2025-02-09 21:10:49,177 - INFO - Starting scraping process for MLNK
+2025-02-09 21:10:49,178 - ERROR - Fatal error during scraping: WebDriver.__init__() got an unexpected keyword argument 'desired_capabilities'
+2025-02-09 21:10:49,178 - ERROR - Script failed: WebDriver.__init__() got an unexpected keyword argument 'desired_capabilities'
+2025-02-09 21:11:00,738 - INFO - Starting scraping process for MLNK
+2025-02-09 21:11:00,739 - ERROR - Fatal error during scraping: WebDriver.__init__() got an unexpected keyword argument 'desired_capabilities'
+2025-02-09 21:11:00,739 - ERROR - Script failed: WebDriver.__init__() got an unexpected keyword argument 'desired_capabilities'
