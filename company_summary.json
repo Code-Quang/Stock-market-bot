@@ -1,0 +1,142 @@
+{
+  "MLNK": {
+    "latest_10k_date": "2023-12-31",
+    "metrics": {
+      "Operating income": {
+        "value": 15533000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 996251000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 488004000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "PD": {
+    "latest_10k_date": "2024-01-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": -75189000,
+        "date": "2024-01-31",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": -96246000,
+        "date": "2024-01-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 925306000,
+        "date": "2024-01-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 746413000,
+        "date": "2024-01-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "AMPL": {
+    "latest_10k_date": "2023-12-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": -90363000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 433684000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 138931000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "CMPO": {
+    "latest_10k_date": "2023-12-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": 19239000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": 119087000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 201041000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 406814000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "WEAV": {
+    "latest_10k_date": "2023-12-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": -31031000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": -34366000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 201012000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 122055000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "EGHT": {
+    "latest_10k_date": "2024-03-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": -67592000,
+        "date": "2024-03-31",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": -27603000,
+        "date": "2024-03-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 755979000,
+        "date": "2024-03-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 654021000,
+        "date": "2024-03-31",
+        "unit": "USD"
+      }
+    }
+  }
+}
