@@ -1,73 +1,66 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import time
-import pandas as pd
-from fake_useragent import UserAgent
-
-ua = UserAgent()
+import json
+import re
+import datetime
+from googlesearch import search
+import csv
+import re
+from selenium.common.exceptions import TimeoutException
 
 # Configure Selenium WebDriver
 chrome_options = Options()
-# chrome_options.add_argument("--headless")  # Run in headless mode
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option("useAutomationExtension", False)
+chrome_options.add_argument("--headless")
 
-# Set up WebDriver
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
-def google_search(query, max_links=5):
-    chrome_options.add_argument(f"user-agent={ua.random}")   
+# Define the list of companies and their tickers
 
-    """
-    Perform a Google search and extract the top search result links.
-    """
-    driver.get("https://www.google.com/")
-    search_box = driver.find_element(By.NAME, "q")
-    search_box.send_keys(query)
-    search_box.send_keys(Keys.RETURN)
-    
-    time.sleep(3)  # Allow results to load
 
-    links = []
-    search_results = driver.find_elements(By.XPATH, '//a[h3]')
-    
-    for result in search_results[:max_links]:
-        links.append(result.get_attribute("href"))
-    
-    return links
+# Get the current year dynamically
+CURRENT_YEAR = datetime.datetime.now().year
 
-def scrape_page(url):
-    """
-    Extract text from a webpage, handling popups and cookie banners only if necessary.
-    """
-    if not url or not isinstance(url, str):
-        print(f"Invalid URL: {url}")
+def clean_text(text):
+    """Cleans the extracted text by removing irrelevant content."""
+    if not text:
         return ""
 
-    driver.get(url)
-    time.sleep(3)  # Allow the page to load
+    text = re.sub(r'\s+', ' ', text).strip()
 
-    # First attempt to extract text without handling popups
-    paragraphs = driver.find_elements(By.TAG_NAME, "p")
-    text_content = " ".join([p.text for p in paragraphs if p.text.strip()])
-    
-    # If the text content is sufficient, return it
-    if len(text_content) > 200:
-        return text_content
+    irrelevant_phrases = [
+        "sign up", "subscribe to continue", "get full access", 
+        "create a free account", "already have an account", 
+        "log in to access", "start your free trial", "cookie policy"
+    ]
+    for phrase in irrelevant_phrases:
+        text = text.replace(phrase, '')
 
-    # If text content is insufficient, handle cookies and popups
-    print(f"Insufficient text extracted from {url}. Handling cookies and popups...")
+    return text
 
-    # Handle Cookie Banners
+def search_google_with_library(query, max_links=5):
+    """Uses the googlesearch library to fetch search result URLs."""
+    links = []
+    try:
+        for url in search(query, num_results=max_links, timeout=10):
+            if "google.com" not in url:  # Avoid Google-related links
+                links.append(url)
+    except Exception as e:
+        print(f"Error fetching Google search results: {e}")
+    return links
+
+def handle_cookies_and_popups():
+    """Handles cookie consent popups and overlays on a webpage."""
     cookie_selectors = [
         'button:contains("Accept all")', 
         'button:contains("Accept cookies")', 
@@ -82,117 +75,113 @@ def scrape_page(url):
             cookie_button = driver.find_element(By.CSS_SELECTOR, selector)
             if cookie_button.is_displayed():
                 cookie_button.click()
-                print(f"Accepted cookies on {url}")
-                time.sleep(2)  # Allow changes to take effect
+                time.sleep(2)
                 break  
         except:
             continue  
 
-    # Detect and close popups
     popup_selectors = [
-        'iframe',
-        'div[aria-hidden="false"]',  
-        'div[class*="popup"]',  
-        'div[class*="overlay"]',  
-        'div[class*="modal"]',  
-        'button[aria-label="Close"]',
-        'button[class*="close"]',
+        'iframe', 'div[aria-hidden="false"]', 'div[class*="popup"]', 
+        'div[class*="overlay"]', 'div[class*="modal"]', 
+        'button[aria-label="Close"]', 'button[class*="close"]',
     ]
-    
+
     popups = driver.find_elements(By.CSS_SELECTOR, ",".join(popup_selectors))
 
     if popups:
-        print(f"Popup detected on {url}, attempting to close...")
-
         for popup in popups:
             try:
-                popup.click()  
-                time.sleep(2)  
-                print("Popup closed.")
+                popup.click()
+                time.sleep(2)
                 break  
             except:
-                print("Failed to close popup.")
-    
-    # Check for lingering popups
-    popups = driver.find_elements(By.CSS_SELECTOR, ",".join(popup_selectors))
-    if popups:  
-        print(f"Popup on {url} cannot be closed. Skipping...")
-        return ""  
+                continue  
 
-    # Detect popups using keyword analysis
-    page_text = driver.page_source.lower()
-    popup_keywords = [
-        "get full access", "subscribe to continue", "sign in to read", 
-        "log in to access", "continue with google", "create a free account",
-        "start your free trial", "already have an account", "register to read more"
-    ]
-    
-    if any(keyword in page_text for keyword in popup_keywords):
-        print(f"Popup-like text found on {url}. Skipping...")
-        return ""  
 
-    # Extract text again after handling popups and cookies
-    paragraphs = driver.find_elements(By.TAG_NAME, "p")
-    text_content = " ".join([p.text for p in paragraphs if p.text.strip()])
-    
-    return text_content
-def google_search(query, max_links=10):
-    """
-    Perform a Google search and extract up to max_links search result links.
-    Ensures at least 5 valid pages are scraped.
-    """
-    driver.get("https://www.google.com/")
-    search_box = driver.find_element(By.NAME, "q")
-    search_box.send_keys(query)
-    search_box.send_keys(Keys.RETURN)
-    
-    time.sleep(3)  # Allow results to load
+def scrape_page(url):
+    """Extracts text from a webpage while handling popups and cookies."""
+    if not url or not isinstance(url, str):
+        return ""
 
-    links = []
-    search_results = driver.find_elements(By.XPATH, '//a[h3]')
-    
-    for result in search_results:
-        href = result.get_attribute("href")
-        if href and "google.com" not in href:  # Avoid Google-related links
-            links.append(href)
-    
-    return links[:max_links]
+    try:
+        driver.set_page_load_timeout(30)  # Set a timeout for page load
+        driver.get(url)
+        time.sleep(3)
 
-def main():
-    company_name = "MeridianLink Inc. (MLNK)"
+        handle_cookies_and_popups()
+
+        paragraphs = driver.find_elements(By.TAG_NAME, "p")
+        text_content = " ".join([p.text for p in paragraphs if p.text.strip()])
+
+        text_content = clean_text(text_content)
+
+        return text_content if len(text_content) > 200 else ""
+
+    except TimeoutException:
+        print(f"Timeout occurred while loading {url}. Skipping to the next URL.")
+        return ""
+
+    except Exception as e:
+        print(f"Error scraping {url}: {e}")
+        return ""
+
+def main(): 
+    companies = []  
+    tickers = []   
+    with open("companies.csv", mode="r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            for entry in row: 
+                match = re.match(r"(.+?)\s\((\w+)\)", entry.strip()) 
+                if match:
+                    company_name, ticker = match.groups()
+                    companies.append(company_name)
+                    tickers.append(ticker)
+
     
-    queries = [
-        f"{company_name} financial and market analysis",  # More analysis-based query
-        f"{company_name} competitors and market trends"
+    base_queries = [
+        "{company} quarterly earnings report site:businesswire.com",
+        "{company} annual report filetype:pdf",
+        "{company} stock analysis report site:fool.com OR site:thestreet.com",
+        "{company} competitors and market share",
+        "{company} stock forecast {year}", 
+        "{ticker} stock technical analysis",  
     ]
 
     results = []
-    
-    for query in queries:
-        print(f"Searching for: {query}")
-        links = google_search(query, max_links=10)  
 
-        valid_results = 0
-        for link in links:
-            if valid_results >= 5:
-                break  
-            
-            print(f"Scraping: {link}")
-            text = scrape_page(link)
-            print(f"text: {text}")
-            print(f"len(text): {len(text)}")
+    for company, ticker in zip(companies, tickers):
+        print(f"\n=== Searching for: {company} ({ticker}) ===\n")
 
-            print('valid_results:', valid_results)
-            
-            if len(text) > 200:  # Save only valid results
-                results.append({"Query": query, "URL": link, "Extracted Text": text})
-                valid_results += 1
+        queries = [query.format(company=company, ticker=ticker, year=CURRENT_YEAR) for query in base_queries]
 
-    # Save results to CSV
-    df = pd.DataFrame(results)
-    df.to_csv("mlnk_data.csv", index=False)
-    
-    print("Scraping complete. Data saved to mlnk_data.csv.")
+        for query in queries:
+            print(f"Searching: {query}")
+            links = search_google_with_library(query, max_links=10)
+
+            valid_results = 0
+            for link in links:
+                if valid_results >= 3:
+                    break  
+
+                print(f"Scraping: {link}")
+                text = scrape_page(link)
+
+                if len(text) > 200:
+                    print('text:',text)
+                    print('valid_results:',valid_results)
+
+                    results.append({"Company": company, "Query": query, "URL": link, "Extracted Text": text})
+                    valid_results += 1
+
+                else:
+                    print("Skipping due to insufficient content.")
+                # time.sleep(random.uniform(3, 6))  
+
+    with open("stock_data.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=4)
+
+    print("\nScraping complete. Data saved to stock_data.json.")
     driver.quit()
 
 if __name__ == "__main__":
