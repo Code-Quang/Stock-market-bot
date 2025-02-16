@@ -138,5 +138,80 @@
         "unit": "USD"
       }
     }
+  },
+  "MX": {
+    "latest_10k_date": "2023-12-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": -36622000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": -57644000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 420491000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 75893000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "LASR": {
+    "latest_10k_date": "2023-12-31",
+    "metrics": {
+      "Net income/loss": {
+        "value": -41670000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": -46766000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 306803000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 52384000,
+        "date": "2023-12-31",
+        "unit": "USD"
+      }
+    }
+  },
+  "AOSL": {
+    "latest_10k_date": "2024-06-30",
+    "metrics": {
+      "Net income/loss": {
+        "value": -11081000,
+        "date": "2024-06-30",
+        "unit": "USD"
+      },
+      "Operating income": {
+        "value": -3756000,
+        "date": "2024-06-30",
+        "unit": "USD"
+      },
+      "Total assets": {
+        "value": 1145013000,
+        "date": "2024-06-30",
+        "unit": "USD"
+      },
+      "Total liabilities": {
+        "value": 253406000,
+        "date": "2024-06-30",
+        "unit": "USD"
+      }
+    }
   }
 }

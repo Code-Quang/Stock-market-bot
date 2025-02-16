@@ -7,6 +7,9 @@ import pandas as pd
 from openai import OpenAI
 from openpyxl.styles import PatternFill
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Constants
 ASSISTANT_ID_FILE = "assistant_id.txt"
 RATE_LIMIT_DELAY = 10  # Start with 10 seconds (exponential backoff increases this)
