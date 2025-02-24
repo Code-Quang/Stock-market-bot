@@ -1,3 +1,4 @@
+import csv  # For reading companies.csv
 import requests
 import json
 import time
@@ -6,6 +7,12 @@ from datetime import datetime
 import re
 from typing import Dict, List, Any
 
+def verify_companies():
+    with open("companies.csv", mode="r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            print(f"Processing row: {row}")
+            
 class CompanyAnalyzer:
     def __init__(self, user_agent: str = 'Company Name (email@domain.com)'):
         self.headers = {
@@ -85,18 +92,47 @@ class CompanyAnalyzer:
         return metrics
 
 def main():
+    # 1. First verify companies
+    verify_companies()
+    print("=== Companies from verification ===")
+
     analyzer = CompanyAnalyzer(user_agent='Your Company Name (your.email@domain.com)')  
     
+    # 2. Read and debug DataFrame
     try:
         df = pd.read_csv('10k_links.csv', header=None, names=['ticker', 'url'])
+        print("=== Contents of 10k_links.csv ===")
+        print(df.head())
+        print(f"Total rows in DataFrame: {len(df)}")
+        
+        # 3. Check for duplicates
+        unique_tickers = df['ticker'].unique()
+        print(f"Unique tickers: {unique_tickers}")
+        print(f"Total unique tickers: {len(unique_tickers)}")
+        
+        # 4. Remove duplicates
+        df = df.drop_duplicates(subset=['ticker'])
+        
     except Exception as e:
         print(f"Error reading CSV: {e}")
         return
     
     company_data = {}
-    
+    processed_tickers = set()  # 5. Track processed companies
+
+    # 6. Modified main processing loop
     for _, row in df.iterrows():
         ticker = row['ticker']
+        print(f"=== Processing row {_} ===")
+        print(f"Full row content: {row.to_dict()}")
+        
+        # Skip if already processed
+        if ticker in processed_tickers:
+            print(f"Skipping duplicate ticker: {ticker}")
+            continue
+        processed_tickers.add(ticker)
+        
+        time.sleep(1)  # Rate limiting
         cik_match = re.search(r'/edgar/data/(\d+)/', row['url'])
         
         if not cik_match:
@@ -105,6 +141,7 @@ def main():
             
         cik = cik_match.group(1)
         print(f"\nAnalyzing {ticker} (CIK: {cik})...")
+        
         
         # Get company facts data
         facts_data = analyzer.get_company_facts(cik)

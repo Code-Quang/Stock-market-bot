@@ -45,21 +45,21 @@
     }
   },
   "AMPL": {
-    "latest_10k_date": "2024-12-31",
+    "latest_10k_date": "2023-12-31",
     "metrics": {
       "Net income/loss": {
-        "value": -94319000,
-        "date": "2024-12-31",
+        "value": -90363000,
+        "date": "2023-12-31",
         "unit": "USD"
       },
       "Total assets": {
-        "value": 445911000,
-        "date": "2024-12-31",
+        "value": 433684000,
+        "date": "2023-12-31",
         "unit": "USD"
       },
       "Total liabilities": {
-        "value": 149355000,
-        "date": "2024-12-31",
+        "value": 138931000,
+        "date": "2023-12-31",
         "unit": "USD"
       }
     }
@@ -210,56 +210,6 @@
       "Total liabilities": {
         "value": 253406000,
         "date": "2024-06-30",
-        "unit": "USD"
-      }
-    }
-  },
-  "NRDY": {
-    "latest_10k_date": "2023-12-31",
-    "metrics": {
-      "Net income/loss": {
-        "value": -40174000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      },
-      "Operating income": {
-        "value": -57571000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      },
-      "Total assets": {
-        "value": 124744000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      },
-      "Total liabilities": {
-        "value": 39138000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      }
-    }
-  },
-  "EHTH": {
-    "latest_10k_date": "2023-12-31",
-    "metrics": {
-      "Net income/loss": {
-        "value": -28214000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      },
-      "Operating income": {
-        "value": -29074000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      },
-      "Total assets": {
-        "value": 1113345000,
-        "date": "2023-12-31",
-        "unit": "USD"
-      },
-      "Total liabilities": {
-        "value": 209261000,
-        "date": "2023-12-31",
         "unit": "USD"
       }
     }

@@ -90,7 +90,8 @@ if __name__ == "__main__":
     files = ["./company_summary.json", "./stock_data.json", "./yahoo_results.json"]
     
     # Upload files and get file IDs
-    file_ids = [upload_file(file) for file in files if upload_file(file) is not None]
+    # this did DOUBLE uploads:  file_ids = [upload_file(file) for file in files if upload_file(file) is not None]
+    file_ids = [id for file in files if (id := upload_file(file)) is not None]
 
     if not file_ids:
         print("No files were uploaded. Exiting...")
