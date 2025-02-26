@@ -1,0 +1,36 @@
+{
+    "MeridianLink Inc.": [
+        {
+            "name": "Pony AI",
+            "ticker": "PONY"
+        },
+        {
+            "name": "Workiva",
+            "ticker": "WK"
+        },
+        {
+            "name": "Cellebrite DI",
+            "ticker": "CLBT"
+        },
+        {
+            "name": "Intapp",
+            "ticker": "INTA"
+        },
+        {
+            "name": "Science Applications International",
+            "ticker": "SAIC"
+        },
+        {
+            "name": "Asana",
+            "ticker": "ASAN"
+        },
+        {
+            "name": "Freshworks",
+            "ticker": "FRSH"
+        },
+        {
+            "name": "GDS",
+            "ticker": "GDS"
+        }
+    ]
+}

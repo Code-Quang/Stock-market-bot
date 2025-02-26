@@ -1,0 +1,93 @@
+{
+  "MLNK": {
+    "metrics": {
+      "Revenue": "Not Available",
+      "Net Income": "Not Available",
+      "Operating Income": 4814000,
+      "Total Assets": 967943000,
+      "Total Liabilities": 549621000,
+      "Stockholders Equity": 418322000,
+      "EPS": "Not Available",
+      "Gross Profit": 154962000,
+      "Cash & Cash Equivalents": 82266000
+    }
+  },
+  "PD": {
+    "metrics": {
+      "Revenue": "Not Available",
+      "Net Income": -33975000,
+      "Operating Income": -48053000,
+      "Total Assets": 866754000,
+      "Total Liabilities": 738665000,
+      "Stockholders Equity": 111596000,
+      "EPS": "Not Available",
+      "Gross Profit": 286362000,
+      "Cash & Cash Equivalents": 326440000
+    }
+  },
+  "AMPL": {
+    "metrics": {
+      "Revenue": "Not Available",
+      "Net Income": -94319000,
+      "Operating Income": "Not Available",
+      "Total Assets": 445911000,
+      "Total Liabilities": 149355000,
+      "Stockholders Equity": 296556000,
+      "EPS": "Not Available",
+      "Gross Profit": 222348000,
+      "Cash & Cash Equivalents": 171678000
+    }
+  },
+  "CMPO": {
+    "metrics": {
+      "Revenue": "Not Available",
+      "Net Income": -16390000,
+      "Operating Income": 92020000,
+      "Total Assets": 435441000,
+      "Total Liabilities": 720450000,
+      "Stockholders Equity": -285009000,
+      "EPS": "Not Available",
+      "Gross Profit": 166693000,
+      "Cash & Cash Equivalents": 52674000
+    }
+  },
+  "WEAV": {
+    "metrics": {
+      "Revenue": 150145000,
+      "Net Income": -21635000,
+      "Operating Income": -24040000,
+      "Total Assets": 192027000,
+      "Total Liabilities": 123191000,
+      "Stockholders Equity": 68836000,
+      "EPS": "Not Available",
+      "Gross Profit": 106838000,
+      "Cash & Cash Equivalents": 51103000
+    }
+  },
+  "VNET": {
+    "metrics": {
+      "Revenue": 494660000,
+      "Net Income": -372378000,
+      "Operating Income": -277596000,
+      "Total Assets": 4279765000,
+      "Total Liabilities": 3362234000,
+      "Stockholders Equity": 847112000,
+      "EPS": "Not Available",
+      "Gross Profit": 182042000,
+      "Cash & Cash Equivalents": 315996000
+    }
+  },
+  "EGHT": {
+    "metrics": {
+      "Revenue": 168907000,
+      "Net Income": -21811000,
+      "Operating Income": 14774000,
+      "Total Assets": 698211000,
+      "Total Liabilities": 585198000,
+      "Stockholders Equity": 113013000,
+      "EPS": "Not Available",
+      "Gross Profit": 365220000,
+      "Cash & Cash Equivalents": 104165000
+    }
+  }
+}
